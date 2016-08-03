@@ -8,7 +8,7 @@ Repository for my personal website.
 - Colorbox
 
 ---
-## Todo :todo:
+## Todo
 - [ ] Build on Nette framework
 - [ ] Load timeline by sections
 - [ ] Add construction photos
