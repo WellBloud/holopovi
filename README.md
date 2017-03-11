@@ -6,10 +6,11 @@ Repository for my personal website.
 - Twitter Bootstrap
 - Foliogallery
 - Colorbox
+- Nette framework
 
 ---
 ## Todo
-- [ ] Build on Nette framework
+- [x] Build on Nette framework
 - [ ] Load timeline by sections
 - [ ] Add construction photos
 - [ ] Add "About us" section?
