@@ -1,5 +1,6 @@
 app/config/config.local.neon
 www/albums/*
+www/images/albums/*
 www/images/thumbs/*
 www/images/fotky/*
 www/soubory/*
