@@ -38,4 +38,19 @@ abstract class BasePresenter extends UI\Presenter
         return $template;
     }
 
+    /**
+     * Prohleda zadanou slozku a vrati seznam souboru
+     * @return  array
+     */
+    protected function getFiles($folder = FALSE)
+    {
+        if ($folder === FALSE) {
+            return [];
+        }
+        $files = scandir($folder);
+        $files = array_diff($files, array('.', '..'));
+
+        return $files;
+    }
+
 }

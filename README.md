@@ -4,7 +4,6 @@ Repository for my personal website.
 ---
 ## Components
 - Twitter Bootstrap
-- Foliogallery
 - Colorbox
 - Nette framework
 

@@ -14,15 +14,15 @@ h1 .fa, .btn .fa, ul.nav.navbar-nav li a > .fa {
     margin: 10px 0;
 }
 .pozvanka {
-	margin: 0 auto;
-	position: relative;
-	width: 575px;
-	height: 394px;
+    margin: 0 auto;
+    position: relative;
+    width: 575px;
+    height: 394px;
 }
 .pozvanka img {
-	position: absolute;
-	top: 0;
-	left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .pozvanka img:hover {
     cursor: pointer;
@@ -42,6 +42,19 @@ h1 .fa, .btn .fa, ul.nav.navbar-nav li a > .fa {
 .home-img {
     margin: 0 auto;
 }
+.gallery .album h2 {
+    font-size: 1.0em;
+}
+.gallery .album {
+    text-align: center;
+    display: inline-block;
+    max-height: 180px;
+    overflow: hidden;
+}
+.gallery .album img {
+    max-width: 200px;
+    height: auto;
+}
 /* TLACITKO PRO POSUN NAHORU */
 .back-to-top {
     background-color: #2c3e50;
@@ -60,7 +73,7 @@ h1 .fa, .btn .fa, ul.nav.navbar-nav li a > .fa {
     width: 2em;
 }
 .back-to-top:hover {
-	text-decoration: none;
+    text-decoration: none;
     color: #fff;
     cursor: pointer;
     opacity: 1;

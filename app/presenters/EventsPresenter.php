@@ -73,7 +73,7 @@ class EventsPresenter extends BasePresenter
     private function addEventProperties()
     {
         foreach ($this->eventsDatabase as $key => $event) {
-            $this->eventsDatabase[$key]['images'] = $this->getImages($event['album']);
+            $this->eventsDatabase[$key]['images'] = $this->getFiles($this->timelineFolder . $event['album']);
             $this->eventsDatabase[$key]['jetomu'] = $this->displayBeforeDate($event['date']);
             $this->eventsDatabase[$key]['czDate'] = strftime("%e. %B %Y", strtotime($event['date']));
         }
@@ -130,21 +130,6 @@ class EventsPresenter extends BasePresenter
         $final_string .= $days . ' ' . $dstr;
 
         return $final_string;
-    }
-
-    /**
-     * Prohleda zadanou slozku a vrati seznam souboru
-     * @return  array
-     */
-    private function getImages($folder)
-    {
-        if ($folder === FALSE) {
-            return [];
-        }
-        $images = scandir($this->timelineFolder . $folder);
-        $images = array_diff($images, array('.', '..'));
-
-        return $images;
     }
 
     private function getEventsDatabase()

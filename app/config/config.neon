@@ -9,6 +9,8 @@ parameters:
     images:
         timelineFolder: 'images/fotky/'
         timelineThumbsFolder: 'images/thumbs/'
+        albumsFolder: 'images/albums/'
+        albumsThumbsFolder: '/thumbs'
     youtube:
         # sirka a vyska iframe (youtube videa)
         iframeWidth: 430
