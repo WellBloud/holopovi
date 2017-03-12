@@ -1,10 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var offset = 200;
     var duration = 400;
 
-    setActiveMenuLink();
-
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         if ($(this).scrollTop() > offset) {
             $('.back-to-top').fadeIn(duration);
         } else {
@@ -12,7 +10,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.back-to-top').click(function(event) {
+    $('.back-to-top').click(function (event) {
         event.preventDefault();
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
@@ -20,13 +18,13 @@ $(document).ready(function() {
 
     // animace svatebniho oznameni
     if ($("#obalka").length > 0) {
-        $("#obalka").click(function(){
-            $(this).animate({opacity: 0.0, top: "+=394px"}, 800 );
+        $("#obalka").click(function () {
+            $(this).animate({opacity: 0.0, top: "+=394px"}, 800);
         });
     }
     if ($("#pozvani").length > 0) {
-        $("#pozvani").click(function(){
-            $("#obalka").animate({opacity: 1.0, top: "-=394px"}, 800 );
+        $("#pozvani").click(function () {
+            $("#obalka").animate({opacity: 1.0, top: "-=394px"}, 800);
         });
     }
 
@@ -56,49 +54,31 @@ $(document).ready(function() {
     });
 
     // timeline udalosti
-	var $timeline_block = $('.timeline-block');
-	//hide timeline blocks which are outside the viewport
-	$timeline_block.each(function(){
-		if($(this).offset().top > $(window).scrollTop()+$(window).height()*0.75) {
-			$(this).find('.timeline-img, .timeline-content').addClass('is-hidden');
-		}
-	});
+    var $timeline_block = $('.timeline-block');
+    //hide timeline blocks which are outside the viewport
+    $timeline_block.each(function () {
+        if ($(this).offset().top > $(window).scrollTop() + $(window).height() * 0.75) {
+            $(this).find('.timeline-img, .timeline-content').addClass('is-hidden');
+        }
+    });
 
-	//on scolling, show/animate timeline blocks when enter the viewport
-	$(window).on('scroll', function(){
-		$timeline_block.each(function(){
-			if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*0.75 && $(this).find('.timeline-img').hasClass('is-hidden') ) {
-				$(this).find('.timeline-img, .timeline-content').removeClass('is-hidden').addClass('bounce-in');
-			}
-		});
-	});
-
-	$('.minialbum').each(function() {
-        var id = $(this).attr('id');
-        $(this).colorbox({
-            rel:id,
-            maxWidth:'98%',
-            maxHeight:'98%',
-            slideshow:false,
-            slideshowAuto:false
-        });
-	});
-});
-
-/*
- * Sets active class on menuitem
- */
-function setActiveMenuLink() {
-    var url = window.location.pathname,
-        // create regexp to match current url pathname and remove trailing slash if present as it
-        // could collide with the link in navigation in case trailing slash wasn't present there
-        urlRegExp = new RegExp(url.replace(/\/$/,'') + "$");
-    if(url!= "/")   {
-        $('nav a').each(function(){
-            // test its normalized href against the url pathname regexp
-            if(urlRegExp.test(this.href.replace(/\/$/,''))){
-                $(this).parent('li').addClass('active');
+    //on scolling, show/animate timeline blocks when enter the viewport
+    $(window).on('scroll', function () {
+        $timeline_block.each(function () {
+            if ($(this).offset().top <= $(window).scrollTop() + $(window).height() * 0.75 && $(this).find('.timeline-img').hasClass('is-hidden')) {
+                $(this).find('.timeline-img, .timeline-content').removeClass('is-hidden').addClass('bounce-in');
             }
         });
-    }
-}
+    });
+
+    $('.minialbum').each(function () {
+        var id = $(this).attr('id');
+        $(this).colorbox({
+            rel: id,
+            maxWidth: '98%',
+            maxHeight: '98%',
+            slideshow: false,
+            slideshowAuto: false
+        });
+    });
+});

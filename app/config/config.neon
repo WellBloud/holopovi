@@ -5,6 +5,9 @@ parameters:
         metaDesc: 'Webové stránky manželů Holopových'
         metaKeys: 'manželé, Holopovi, Holop, Holopová'
         version: '1.3'
+    images:
+        timelineFolder: 'images/fotky/'
+        timelineThumbsFolder: 'images/thumbs/'
 
 application:
         errorPresenter: Error

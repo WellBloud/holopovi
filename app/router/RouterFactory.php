@@ -24,6 +24,7 @@ class RouterFactory
                     // řetězec v URL => presenter
                     'oznameni' => 'Invitation',
                     'galerie' => 'Gallery',
+                    'udalosti' => 'Events',
                 ],
             ],
             'action' => 'default',
