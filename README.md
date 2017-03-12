@@ -11,7 +11,7 @@ Repository for my personal website.
 ---
 ## Todo
 - [x] Build on Nette framework
-- [ ] Load timeline by sections
+- [x] Load timeline by sections on page scroll
 - [ ] Add construction photos
 - [ ] Add "About us" section?
 - [ ] Add Facebook timeline

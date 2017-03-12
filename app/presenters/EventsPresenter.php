@@ -7,24 +7,46 @@
 
 namespace App\Presenters;
 
+use Model\Service\AppSettings;
+
 class EventsPresenter extends BasePresenter
 {
 
+    private $eventsDatabase;
     private $events;
     private $timelineFolder;
     private $timelineThumbsFolder;
+    private $count;
     // sirka a vyska iframe (youtube videa)
-    private $iframeWidth = 430;
-    private $iframeHeight = 242;
+    private $iframeWidth;
+    private $iframeHeight;
+
+    public function __construct(AppSettings $appSettings)
+    {
+        parent::__construct($appSettings);
+        setlocale(LC_TIME, 'czech');
+        setlocale(LC_TIME, 'cs_CZ');
+        $this->iframeHeight = $this->appSettings->getParameter(['youtube', 'iframeHeight']);
+        $this->iframeWidth = $this->appSettings->getParameter(['youtube', 'iframeWidth']);
+        $this->timelineFolder = $this->appSettings->getParameter(['images', 'timelineFolder']);
+        $this->timelineThumbsFolder = $this->appSettings->getParameter(['images', 'timelineThumbsFolder']);
+        $this->count = $this->appSettings->getParameter(['global', 'loadEvents']);
+        $this->eventsDatabase = $this->getEventsDatabase();
+        $this->addEventProperties();
+    }
 
     public function actionDefault()
     {
-        setlocale(LC_TIME, 'czech');
-        setlocale(LC_TIME, 'cs_CZ');
-        $this->timelineFolder = $this->appSettings->getParameter(['images', 'timelineFolder']);
-        $this->timelineThumbsFolder = $this->appSettings->getParameter(['images', 'timelineThumbsFolder']);
-        $this->events = $this->getEvents();
-        $this->addEventProperties();
+        $this->events = $this->getEvents($this->count);
+    }
+
+    public function handleLoadMoreEvents($offset)
+    {
+        $events = $this->getEvents($this->count, $offset);
+        if (!empty($events)) {
+            $this->events = $events;
+            $this->redrawControl('eventsSnippet');
+        }
     }
 
     public function renderDefault()
@@ -34,7 +56,98 @@ class EventsPresenter extends BasePresenter
         $this->template->timelineThumbsFolder = $this->timelineThumbsFolder;
     }
 
-    private function getEvents()
+    /**
+     * Load portion of events
+     * @param integer $count
+     * @param integer $offset
+     * @return array
+     */
+    private function getEvents($count, $offset = 0)
+    {
+        return array_slice($this->eventsDatabase, $offset, $count);
+    }
+
+    /**
+     * Set extra properties to the $eventsDatabase
+     */
+    private function addEventProperties()
+    {
+        foreach ($this->eventsDatabase as $key => $event) {
+            $this->eventsDatabase[$key]['images'] = $this->getImages($event['album']);
+            $this->eventsDatabase[$key]['jetomu'] = $this->displayBeforeDate($event['date']);
+            $this->eventsDatabase[$key]['czDate'] = strftime("%e. %B %Y", strtotime($event['date']));
+        }
+    }
+
+    /**
+     * Displays how many years, months and days it has been from set date
+     * @param   $date   datum
+     * @return string
+     */
+    private function displayBeforeDate($date)
+    {
+        $diff = abs(strtotime(date("Y-m-d")) - strtotime($date));
+
+        $years = floor($diff / (365 * 60 * 60 * 24));
+        $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+        $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+
+        if ($years == 1) {
+            $ystr = 'rok';
+        } else if ($years > 1 && $years < 5) {
+            $ystr = 'roky';
+        } else {
+            $ystr = 'roků';
+        }
+        if ($months == 1) {
+            $mstr = 'měsíc';
+        } else if ($months > 1 && $months < 5) {
+            $mstr = 'měsíce';
+        } else {
+            $mstr = 'měsíců';
+        }
+        if ($days == 1) {
+            $dstr = 'den';
+        } else if ($days > 1 && $days < 5) {
+            $dstr = 'dny';
+        } else {
+            $dstr = 'dnů';
+        }
+
+        $final_string = 'Už je tomu ';
+        if ($years != 0) {
+            $final_string .= $years . ' ' . $ystr;
+            if ($months == 0) {
+                $final_string .= ' a ';
+            }
+        }
+        if ($months != 0) {
+            if ($years != 0) {
+                $final_string .= ' ';
+            }
+            $final_string .= $months . ' ' . $mstr . ' a ';
+        }
+        $final_string .= $days . ' ' . $dstr;
+
+        return $final_string;
+    }
+
+    /**
+     * Prohleda zadanou slozku a vrati seznam souboru
+     * @return  array
+     */
+    private function getImages($folder)
+    {
+        if ($folder === FALSE) {
+            return [];
+        }
+        $images = scandir($this->timelineFolder . $folder);
+        $images = array_diff($images, array('.', '..'));
+
+        return $images;
+    }
+
+    private function getEventsDatabase()
     {
         $events = [
             [
@@ -65,13 +178,13 @@ class EventsPresenter extends BasePresenter
                 'date' => '2014-08-21',
                 'title' => 'Svatební cesta',
                 'album' => false,
-                'desc' => '<p>Líbánky jsme si užívali na Krétě, fotek je moc a tak jsou v <a href="/galerie.php">galerii</a>.</p>',
+                'desc' => '<p>Líbánky jsme si užívali na Krétě, fotek je moc a tak jsou v galerii.</p>',
                 'icon' => 'location',
             ], [
                 'date' => '2014-07-12',
                 'title' => 'Svatba',
                 'album' => false,
-                'desc' => '<p>A už jsme oficiálně svoji...</p><p>Fotky jsou v naší <a href="/galerie.php">galerii</a>.</p>
+                'desc' => '<p>A už jsme oficiálně svoji...</p><p>Fotky jsou v naší galerii.</p>
                 <p>
                     <iframe width="' . $this->iframeWidth . '" height="' . $this->iframeHeight . '" src="https://www.youtube.com/embed/PAR_n_z7_7k?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
                 </p>',
@@ -307,83 +420,6 @@ class EventsPresenter extends BasePresenter
             ],
         ];
         return $events;
-    }
-
-    private function addEventProperties()
-    {
-        foreach ($this->events as $key => $event) {
-            $this->events[$key]['images'] = $this->getImages($event['album']);
-            $this->events[$key]['jetomu'] = $this->displayBeforeDate($event['date']);
-            $this->events[$key]['czDate'] = strftime("%e. %B %Y", strtotime($event['date']));
-        }
-    }
-
-    /**
-     * Displays how many years, months and days it has been from set date
-     * @param   $date   datum
-     * @return string
-     */
-    private function displayBeforeDate($date)
-    {
-        $diff = abs(strtotime(date("Y-m-d")) - strtotime($date));
-
-        $years = floor($diff / (365 * 60 * 60 * 24));
-        $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
-        $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
-
-        if ($years == 1) {
-            $ystr = 'rok';
-        } else if ($years > 1 && $years < 5) {
-            $ystr = 'roky';
-        } else {
-            $ystr = 'roků';
-        }
-        if ($months == 1) {
-            $mstr = 'měsíc';
-        } else if ($months > 1 && $months < 5) {
-            $mstr = 'měsíce';
-        } else {
-            $mstr = 'měsíců';
-        }
-        if ($days == 1) {
-            $dstr = 'den';
-        } else if ($days > 1 && $days < 5) {
-            $dstr = 'dny';
-        } else {
-            $dstr = 'dnů';
-        }
-
-        $final_string = 'Už je tomu ';
-        if ($years != 0) {
-            $final_string .= $years . ' ' . $ystr;
-            if ($months == 0) {
-                $final_string .= ' a ';
-            }
-        }
-        if ($months != 0) {
-            if ($years != 0) {
-                $final_string .= ' ';
-            }
-            $final_string .= $months . ' ' . $mstr . ' a ';
-        }
-        $final_string .= $days . ' ' . $dstr;
-
-        return $final_string;
-    }
-
-    /**
-     * Prohleda zadanou slozku a vrati seznam souboru
-     * @return  array
-     */
-    private function getImages($folder)
-    {
-        if ($folder === FALSE) {
-            return [];
-        }
-        $images = scandir($this->timelineFolder . $folder);
-        $images = array_diff($images, array('.', '..'));
-
-        return $images;
     }
 
 }

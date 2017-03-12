@@ -4,27 +4,50 @@
         <h1><i class="fa fa-calendar-o"></i>Události <small>aneb společná cesta životem</small></h1>
     </div>
     <section id="timeline" class="tl-container" n:if="!empty($events)">
-        {foreach $events as $event}
-            <section class="timeline-block">
-                <div class="timeline-img {$event['icon']}">
-                    <img src="{$basePath}/images/cd-icon-{$event['icon']}.svg" alt="{$event['icon']}">
-                </div>
-                <div class="timeline-content">
-                    <h2>{$event['title']}</h2>
-                    <div>{$event['desc']|noescape}</div>
-                    <p n:if="$event['album'] !== false">
-                        {foreach $event['images'] as $foto}
-                            <a class="minialbum" id="{$event['album']}" href="{$basePath}/{$timelineFolder}{$event['album']}/{$foto}">
-                                <img src="{$basePath}/{$timelineThumbsFolder}{$event['album']}/{$foto}" alt="{$event['title']}" />
-                            </a>
-                        {/foreach}
-                    </p>
-                    <time datetime="{$event['date']}">{$event['czDate']}<br />
-                        <small>{$event['jetomu']}</small>
-                    </time>
-                </div>
-            </section>
-        {/foreach}
+        <div data-ajax-append n:snippet="eventsSnippet">
+            {foreach $events as $event}
+                <section class="timeline-block">
+                    <div class="timeline-img {$event['icon']}">
+                        <img src="{$basePath}/images/cd-icon-{$event['icon']}.svg" alt="{$event['icon']}">
+                    </div>
+                    <div class="timeline-content">
+                        <h2>{$event['title']}</h2>
+                        <div>{$event['desc']|noescape}</div>
+                        <p n:if="$event['album'] !== false">
+                            {foreach $event['images'] as $foto}
+                                <a class="minialbum" id="{$event['album']}" href="{$basePath}/{$timelineFolder}{$event['album']}/{$foto}">
+                                    <img src="{$basePath}/{$timelineThumbsFolder}{$event['album']}/{$foto}" alt="{$event['title']}" />
+                                </a>
+                            {/foreach}
+                        </p>
+                        <time datetime="{$event['date']}">{$event['czDate']}<br />
+                            <small>{$event['jetomu']}</small>
+                        </time>
+                    </div>
+                </section>
+            {/foreach}
+        </div>
     </section>
 </div>
+{/block}
+{block scripts}
+<script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
+<script>
+    /**
+     * Load more orders when window scroll reaches bottom of the page
+     */
+    $(window).scroll(function () { //detect page scroll
+        //if user scrolled to bottom of the page
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            var count = $('.timeline-block').length;
+            $.nette.ajax({
+                type: 'POST',
+                url: {link loadMoreEvents!},
+                data: {
+                    offset: count
+                }
+            });
+        }
+    });
+</script>
 {/block}
