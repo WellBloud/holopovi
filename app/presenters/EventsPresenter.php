@@ -92,28 +92,28 @@ class EventsPresenter extends BasePresenter
         $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
 
         if ($years == 1) {
-            $ystr = 'rok';
+            $ystr = 'rokem';
         } else if ($years > 1 && $years < 5) {
             $ystr = 'roky';
         } else {
-            $ystr = 'roků';
+            $ystr = 'roky';
         }
         if ($months == 1) {
-            $mstr = 'měsíc';
+            $mstr = 'měsícem';
         } else if ($months > 1 && $months < 5) {
-            $mstr = 'měsíce';
+            $mstr = 'měsíci';
         } else {
-            $mstr = 'měsíců';
+            $mstr = 'měsíci';
         }
         if ($days == 1) {
-            $dstr = 'den';
+            $dstr = 'dnem';
         } else if ($days > 1 && $days < 5) {
             $dstr = 'dny';
         } else {
-            $dstr = 'dnů';
+            $dstr = 'dny';
         }
 
-        $final_string = 'Už je tomu ';
+        $final_string = 'Před ';
         if ($years != 0) {
             $final_string .= $years . ' ' . $ystr;
             if ($months == 0) {
@@ -135,6 +135,12 @@ class EventsPresenter extends BasePresenter
     {
         $events = [
             [
+                'date' => '2016-03-27',
+                'title' => 'U rajhradského rybníka',
+                'album' => '2016_rajhrad_rybnik',
+                'desc' => '',
+                'icon' => 'picture',
+            ], [
                 'date' => '2015-09-25',
                 'title' => 'Zájezd do Paříže',
                 'album' => '2015_pariz',

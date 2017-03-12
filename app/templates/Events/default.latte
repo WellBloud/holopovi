@@ -5,27 +5,27 @@
     </div>
     <section id="timeline" class="tl-container" n:if="!empty($events)">
         <div data-ajax-append n:snippet="eventsSnippet">
-            {foreach $events as $event}
-                <section class="timeline-block">
-                    <div class="timeline-img {$event['icon']}">
-                        <img src="{$basePath}/images/cd-icon-{$event['icon']}.svg" alt="{$event['icon']}">
-                    </div>
-                    <div class="timeline-content">
-                        <h2>{$event['title']}</h2>
-                        <div>{$event['desc']|noescape}</div>
-                        <p n:if="$event['album'] !== false">
-                            {foreach $event['images'] as $foto}
-                                <a class="minialbum" id="{$event['album']}" href="{$basePath}/{$timelineFolder}{$event['album']}/{$foto}">
-                                    <img src="{$basePath}/{$timelineThumbsFolder}{$event['album']}/{$foto}" alt="{$event['title']}" />
-                                </a>
-                            {/foreach}
-                        </p>
+            <section n:foreach="$events as $event" class="timeline-block">
+                <div class="timeline-img {$event['icon']}">
+                    <img src="{$basePath}/images/cd-icon-{$event['icon']}.svg" alt="{$event['icon']}">
+                </div>
+                <div class="timeline-content">
+                    <h2>{$event['title']}</h2>
+                    <div>{$event['desc']|noescape}</div>
+                    <p n:if="$event['album'] !== false">
+                        {foreach $event['images'] as $foto}
+                            <a class="minialbum" id="{$event['album']}" href="{$basePath}/{$timelineFolder}{$event['album']}/{$foto}">
+                                <img src="{$basePath}/{$timelineThumbsFolder}{$event['album']}/{$foto}" alt="{$event['title']}" />
+                            </a>
+                        {/foreach}
+                    </p>
+                    <div class="time">
                         <time datetime="{$event['date']}">{$event['date']|date:'j. n. Y'}<br />
                             <small>{$event['jetomu']}</small>
                         </time>
                     </div>
-                </section>
-            {/foreach}
+                </div>
+            </section>
         </div>
     </section>
 </div>
@@ -46,6 +46,8 @@
                 data: {
                     offset: count
                 }
+            }).done(function () {
+                hideTimelineBlocks();
             });
         }
     });

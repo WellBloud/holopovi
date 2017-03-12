@@ -4,7 +4,7 @@ parameters:
         metaAuthor: 'Peter Holop'
         metaDesc: 'Webové stránky rodiny Holopových'
         metaKeys: 'manželé, Holopovi, Holop, Holopová'
-        version: '2.0'
+        version: '2.0.1'
         loadEvents: 3
     images:
         timelineFolder: 'images/fotky/'
@@ -13,8 +13,8 @@ parameters:
         albumsThumbsFolder: 'thumbs'
     youtube:
         # sirka a vyska iframe (youtube videa)
-        iframeWidth: 430
-        iframeHeight: 242
+        iframeWidth: 462
+        iframeHeight: 260
 
 application:
         errorPresenter: Error

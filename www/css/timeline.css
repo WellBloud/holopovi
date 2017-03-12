@@ -12,7 +12,7 @@ img {
 }
 .tl-container {
     /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
-    width: 90%;
+    width: 100%;
     max-width: 1170px;
     margin: 0 auto;
 }
@@ -38,7 +38,7 @@ img {
 }
 @media only screen and (min-width: 1170px) {
     #timeline::before {
-        left: 50%;
+        left: 20%;
         margin-left: -2px;
     }
 }
@@ -100,7 +100,7 @@ img {
     .timeline-img {
         width: 60px;
         height: 60px;
-        left: 50%;
+        left: 20%;
         margin-left: -30px;
         /* Force Hardware Acceleration in WebKit */
         -webkit-transform: translateZ(0);
@@ -186,7 +186,7 @@ img {
 .timeline-content time {
     float: left;
     padding: .8em 0;
-    opacity: .7;
+    /*opacity: .7;*/
 }
 .timeline-content::before {
     content: '';
@@ -204,21 +204,11 @@ img {
         font-size: 1.25em;
         margin: 0.25em 0;
     }
-    .timeline-content time {
-        font-size: 14px;
-        font-size: 0.875em;
-    }
 }
 @media only screen and (min-width: 1170px) {
     .timeline-content {
         margin-left: 0;
-        width: 45%;
-    }
-    .timeline-content::before {
-        top: 20px;
-        left: 100%;
-        border-color: transparent;
-        border-left-color: #eee;
+        width: 75%;
     }
     .timeline-content time {
         position: absolute;
@@ -228,20 +218,20 @@ img {
         font-size: 16px;
         font-size: 1em;
     }
-    .timeline-block:nth-child(even) .timeline-content {
+    .timeline-block .timeline-content {
         float: right;
     }
-    .timeline-block:nth-child(even) .timeline-content::before {
-        top: 20px;
+    .timeline-block .timeline-content time {
         left: auto;
-        right: 100%;
-        border-color: transparent;
-        border-right-color: #eee;
-    }
-    .timeline-block:nth-child(even) .timeline-content time {
-        left: auto;
-        right: 122%;
+        right: 112%;
         text-align: right;
+        width: 20%;
+        font-size: 1.5em;
+        padding-top: 0.35em;
+        line-height: 1.25em;
+    }
+    .timeline-block .timeline-content time small {
+        font-size: 0.50em;
     }
     .cssanimations .timeline-content.is-hidden {
         visibility: hidden;
