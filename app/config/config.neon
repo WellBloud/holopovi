@@ -1,0 +1,29 @@
+parameters:
+    global:
+        sitename: 'Holopovi.cz'
+        metaAuthor: 'Peter Holop'
+        metaDesc: 'Webové stránky rodiny Holopových'
+        metaKeys: 'manželé, Holopovi, Holop, Holopová'
+        version: '2.0'
+        loadEvents: 3
+    images:
+        timelineFolder: 'images/fotky/'
+        timelineThumbsFolder: 'images/thumbs/'
+        albumsFolder: 'images/albums/'
+        albumsThumbsFolder: 'thumbs'
+    youtube:
+        # sirka a vyska iframe (youtube videa)
+        iframeWidth: 430
+        iframeHeight: 242
+
+application:
+        errorPresenter: Error
+        mapping:
+                *: App\*Module\Presenters\*Presenter
+
+session:
+        expiration: 14 days
+
+services:
+        appSettings: Model\Service\AppSettings
+        router: App\RouterFactory::createRouter

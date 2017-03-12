@@ -4,13 +4,13 @@ Repository for my personal website.
 ---
 ## Components
 - Twitter Bootstrap
-- Foliogallery
 - Colorbox
+- Nette framework
 
 ---
 ## Todo
-- [ ] Build on Nette framework
-- [ ] Load timeline by sections
+- [x] Build on Nette framework
+- [x] Load timeline by sections on page scroll
 - [ ] Add construction photos
 - [ ] Add "About us" section?
 - [ ] Add Facebook timeline

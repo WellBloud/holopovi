@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Všechno nejlepší, Kubo!</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name='description' content='Všechno NEJ, Kubíčku pupíčku :D'>
+        <meta name='keywords' content='Kuba, Jedla, narozeniny, všechno, nejlepší, čoveče'>
+        <meta name='author' content='Holopovi.cz'>
+        <link rel="stylesheet" href="{$basePath}/kubafiles/jquery.countdown.css?v=2">
+        <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="{$basePath}/kubafiles/jquery.plugin.js"></script>
+        <script src="{$basePath}/kubafiles/jquery.countdown.js"></script>
+        <script>
+            $(function () {
+                var narozky = new Date("February 25, 2016 12:00:00");
+                $('#defaultCountdown').countdown({
+                    until: narozky, format: 'OWDHMS'
+                });
+                var ctyricet = new Date("February 25, 2026 12:00:00");
+                $('#ctyricitka').countdown({
+                    until: ctyricet, format: 'OWDHMS'
+                });
+            });
+
+            (function ($) {
+                $.countdown.regionalOptions['cs'] = {
+                    labels: ['Roků', 'Měsíců', 'Týdnů', 'Dní', 'Hodin', 'Minut', 'Sekund'],
+                    labels1: ['Rok', 'Měsíc', 'Týden', 'Den', 'Hodina', 'Minuta', 'Sekunda'],
+                    labels2: ['Roky', 'Měsíce', 'Týdny', 'Dny', 'Hodiny', 'Minuty', 'Sekundy'],
+                    compactLabels: ['r', 'm', 't', 'd'],
+                    whichLabels: function (amount) {
+                        return (amount == 1 ? 1 : (amount >= 2 && amount <= 4 ? 2 : 0));
+                    },
+                    digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                    timeSeparator: ':', isRTL: false};
+                $.countdown.setDefaults($.countdown.regionalOptions['cs']);
+            })(jQuery);
+        </script>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Všechno nejlepší, Kubo!</h1>
+            <iframe width="550" height="413" src="https://www.youtube.com/embed/tQB-wo5g9KA?rel=0&amp;showinfo=0&amp;autoplay=1" frameborder="0" allowfullscreen></iframe>
+            <h2>Všechno je to boží!</h2>
+            <p>... teda až na Tvůj věk, to už není žádná prdel ...</p>
+            <p>Nicméně máš poslední šanci si pořádně užívat, protože jsi stále ještě <b>mladík!</b> ☺</p>
+            <p>Hlavně ale neusnout na vavřínech a začni se připravovat!</p>
+            <p>Ta <b>pravá párty</b> totiž začne za</p>
+            <div id="defaultCountdown"></div>
+            <p><strong>Cože? Odpočet už skončil?</strong></p>
+            <p><strong>Nezoufej, je tu ještě jeden! ☺</strong></p>
+            <div id="ctyricitka"></div>
+        </div>
+    </body>
+</html>

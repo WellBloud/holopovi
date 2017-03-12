@@ -1,0 +1,25 @@
+{block content}
+<div class="theme-showcase" role="main">
+    <div class="page-header">
+        <h1><i class="fa fa-picture-o"></i>Galerie</h1>
+    </div>
+    {if !empty($albums)}
+        <div class="gallery">
+            <div class="row">
+                {foreach $albums as $album}
+                    <div class="album col-md-2 col-xs-6">
+                        <a n:href="Gallery:detail, $album['webalized']">
+                            <h2>{$album['title']}</h2>
+                            <img src="{$basePath}/{$album['photo']}" alt="{$album['title']}"/>
+                        </a>
+                    </div>
+                    {if $iterator->counter == 6}
+                    </div>
+                    <div class="row">
+                    {/if}
+                {/foreach}
+            </div>
+        </div>
+    {/if}
+</div>
+{/block}

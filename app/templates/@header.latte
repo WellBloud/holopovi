@@ -1,0 +1,29 @@
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Zobrazit navigaci</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" n:href="Homepage:">{$sitename}</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li{ifCurrent Homepage:*} class="active"{/ifCurrent}><a n:href="Homepage:"><i class="fa fa-home"></i>Úvodní stránka</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-venus-mars"></i>Svatba <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li{ifCurrent Invitation:*} class="active"{/ifCurrent}><a n:href="Invitation:"><i class="fa fa-envelope-o"></i>Svatební oznámení</a></li>
+                            <li{ifCurrent Video:*} class="active"{/ifCurrent}><a n:href="Video:"><i class="fa fa-film"></i>Svatební video</a></li>
+                        </ul>
+                    </li>
+                    <li{ifCurrent Gallery:*} class="active"{/ifCurrent}><a n:href="Gallery:"><i class="fa fa-picture-o"></i>Galerie</a></li>
+                    <li{ifCurrent Events:*} class="active"{/ifCurrent}><a n:href="Events:"><i class="fa fa-calendar-o"></i>Události</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
