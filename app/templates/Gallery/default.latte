@@ -8,7 +8,7 @@
             <div class="row">
                 {foreach $albums as $album}
                     <div class="album col-md-2 col-xs-6">
-                        <a n:href="Gallery:">
+                        <a n:href="Gallery:detail, $album['webalized']">
                             <h2>{$album['title']}</h2>
                             <img src="{$basePath}/{$album['photo']}" alt="{$album['title']}"/>
                         </a>

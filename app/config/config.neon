@@ -2,15 +2,15 @@ parameters:
     global:
         sitename: 'Holopovi.cz'
         metaAuthor: 'Peter Holop'
-        metaDesc: 'Webové stránky manželů Holopových'
+        metaDesc: 'Webové stránky rodiny Holopových'
         metaKeys: 'manželé, Holopovi, Holop, Holopová'
-        version: '1.3'
+        version: '2.0'
         loadEvents: 3
     images:
         timelineFolder: 'images/fotky/'
         timelineThumbsFolder: 'images/thumbs/'
         albumsFolder: 'images/albums/'
-        albumsThumbsFolder: '/thumbs'
+        albumsThumbsFolder: 'thumbs'
     youtube:
         # sirka a vyska iframe (youtube videa)
         iframeWidth: 430

@@ -45,15 +45,22 @@ h1 .fa, .btn .fa, ul.nav.navbar-nav li a > .fa {
 .gallery .album h2 {
     font-size: 1.0em;
 }
-.gallery .album {
+.gallery .album, .gallery .photo {
     text-align: center;
     display: inline-block;
     max-height: 180px;
     overflow: hidden;
 }
-.gallery .album img {
+.gallery .photo {
+    margin-bottom: 1em;
+    max-height: 140px;
+}
+.gallery .album img, .gallery .photo img {
     max-width: 200px;
     height: auto;
+}
+.alert {
+    margin-top: 1em;
 }
 /* TLACITKO PRO POSUN NAHORU */
 .back-to-top {

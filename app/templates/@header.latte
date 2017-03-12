@@ -12,16 +12,16 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li{ifCurrent Homepage:} class="active"{/ifCurrent}><a n:href="Homepage:"><i class="fa fa-home"></i>Úvodní stránka</a></li>
+                    <li{ifCurrent Homepage:*} class="active"{/ifCurrent}><a n:href="Homepage:"><i class="fa fa-home"></i>Úvodní stránka</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-venus-mars"></i>Svatba <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li{ifCurrent Invitation:} class="active"{/ifCurrent}><a n:href="Invitation:"><i class="fa fa-envelope-o"></i>Svatební oznámení</a></li>
-                            <li{ifCurrent Video:} class="active"{/ifCurrent}><a n:href="Video:"><i class="fa fa-film"></i>Svatební video</a></li>
+                            <li{ifCurrent Invitation:*} class="active"{/ifCurrent}><a n:href="Invitation:"><i class="fa fa-envelope-o"></i>Svatební oznámení</a></li>
+                            <li{ifCurrent Video:*} class="active"{/ifCurrent}><a n:href="Video:"><i class="fa fa-film"></i>Svatební video</a></li>
                         </ul>
                     </li>
-                    <li{ifCurrent Gallery:} class="active"{/ifCurrent}><a n:href="Gallery:"><i class="fa fa-picture-o"></i>Galerie</a></li>
-                    <li{ifCurrent Events:} class="active"{/ifCurrent}><a n:href="Events:"><i class="fa fa-calendar-o"></i>Události</a></li>
+                    <li{ifCurrent Gallery:*} class="active"{/ifCurrent}><a n:href="Gallery:"><i class="fa fa-picture-o"></i>Galerie</a></li>
+                    <li{ifCurrent Events:*} class="active"{/ifCurrent}><a n:href="Events:"><i class="fa fa-calendar-o"></i>Události</a></li>
                 </ul>
             </div>
         </div>
