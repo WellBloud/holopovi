@@ -20,7 +20,7 @@
                                 </a>
                             {/foreach}
                         </p>
-                        <time datetime="{$event['date']}">{$event['czDate']}<br />
+                        <time datetime="{$event['date']}">{$event['date']|date:'j. n. Y'}<br />
                             <small>{$event['jetomu']}</small>
                         </time>
                     </div>

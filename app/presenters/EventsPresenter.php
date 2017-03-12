@@ -75,7 +75,6 @@ class EventsPresenter extends BasePresenter
         foreach ($this->eventsDatabase as $key => $event) {
             $this->eventsDatabase[$key]['images'] = $this->getFiles($this->timelineFolder . $event['album']);
             $this->eventsDatabase[$key]['jetomu'] = $this->displayBeforeDate($event['date']);
-            $this->eventsDatabase[$key]['czDate'] = strftime("%e. %B %Y", strtotime($event['date']));
         }
     }
 
