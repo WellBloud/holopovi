@@ -1,4 +1,5 @@
 app/config/config.local.neon
+vendor/
 www/albums/*
 www/images/albums/*
 www/images/thumbs/*
