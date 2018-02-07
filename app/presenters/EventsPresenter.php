@@ -11,7 +11,6 @@ use Model\Service\AppSettings;
 
 class EventsPresenter extends BasePresenter
 {
-
     private $eventsDatabase;
     private $events;
     private $timelineFolder;
@@ -62,7 +61,8 @@ class EventsPresenter extends BasePresenter
      * @param integer $offset
      * @return array
      */
-    private function getEvents($count, $offset = 0)
+    private function getEvents($count,
+        $offset = 0)
     {
         return array_slice($this->eventsDatabase, $offset, $count);
     }
@@ -134,6 +134,19 @@ class EventsPresenter extends BasePresenter
     private function getEventsDatabase()
     {
         $events = [
+            [
+                'date' => '2018-01-30',
+                'title' => 'Plavání s Verunkou',
+                'album' => false,
+                'desc' => '<p>První společné skotačení v bazénu</p>
+                <p>
+                    <iframe width="' . $this->iframeWidth . '" height="' . $this->iframeHeight . '" src="https://www.youtube.com/embed/cMfzHPlrgaM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </p>
+                <p>
+                    <iframe width="' . $this->iframeWidth . '" height="' . $this->iframeHeight . '" src="https://www.youtube.com/embed/t7t4a10ZjK8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </p>',
+                'icon' => 'movie',
+            ],
             [
                 'date' => '2017-08-15',
                 'title' => 'Rodinné focení',
@@ -430,5 +443,4 @@ class EventsPresenter extends BasePresenter
         ];
         return $events;
     }
-
 }
