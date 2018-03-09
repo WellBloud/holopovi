@@ -135,6 +135,13 @@ class EventsPresenter extends BasePresenter
     {
         $events = [
             [
+                'date' => '2018-02-18',
+                'title' => 'Další focení s bříškem',
+                'album' => '2018_foceni_brisko',
+                'desc' => '<p>Verča má 11 měsíců a bráška bude za 3 měsíce na světě</p>',
+                'icon' => 'picture',
+            ],
+            [
                 'date' => '2018-01-30',
                 'title' => 'Plavání s Verunkou',
                 'album' => false,

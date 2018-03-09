@@ -11,6 +11,10 @@ Allow from all
 	RewriteEngine On
 	# RewriteBase /
 
+    # redirect non-www to www
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
 	# prevents files starting with dot to be viewed by browser
 	RewriteRule /\.|^\.(?!well-known/) - [F]
 
