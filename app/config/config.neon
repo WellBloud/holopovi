@@ -4,8 +4,12 @@ parameters:
         metaAuthor: 'Peter Holop'
         metaDesc: 'Webové stránky rodiny Holopových'
         metaKeys: 'manželé, Holopovi, Holop, Holopová'
-        version: '2.0.1'
+        version: '2.1.0'
         loadEvents: 3
+    doctrine:
+        user: 'a24810_holop'
+        pass: 'LxBvTHjm'
+        name: 'd24810_holop'
     images:
         timelineFolder: 'images/fotky/'
         timelineThumbsFolder: 'images/thumbs/'
@@ -20,6 +24,13 @@ application:
         errorPresenter: Error
         mapping:
                 *: App\*Module\Presenters\*Presenter
+doctrine:
+    user: %doctrine.user%
+    password: %doctrine.pass%
+    dbname: %doctrine.name%
+    metadata:
+        App: %appDir%
+    defaultRepositoryClassName: Kdyby\Doctrine\EntityRepository
 
 session:
         expiration: 14 days
@@ -27,3 +38,15 @@ session:
 services:
         appSettings: Model\Service\AppSettings
         router: App\RouterFactory::createRouter
+
+        EventRepository:
+        		class: App\Model\FrontModule\Repository\EventRepository
+        		tags:
+        			doctrine.repositoryEntity: App\Model\Entities\Event
+#        - App\Model\FrontModule\Repository\EventRepository
+
+extensions:
+    console: Kdyby\Console\DI\ConsoleExtension
+    events: Kdyby\Events\DI\EventsExtension
+    annotations: Kdyby\Annotations\DI\AnnotationsExtension
+    doctrine: Kdyby\Doctrine\DI\OrmExtension

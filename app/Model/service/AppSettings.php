@@ -2,9 +2,9 @@
 
 namespace Model\Service;
 
-use Nette\Object,
-    Nette\DI\Container,
-    Exception;
+use Exception;
+use Nette\DI\Container;
+use Nette\SmartObject;
 
 /**
  * Application settings service
@@ -12,9 +12,9 @@ use Nette\Object,
  * @author Zuzana Kreizlova
  * @author Peter Holop <holop@sovanet.cz>
  */
-class AppSettings extends Object
+class AppSettings
 {
-
+    use SmartObject;
     /** @var array */
     private $parameters;
 
@@ -64,7 +64,7 @@ class AppSettings extends Object
 
             if (!is_array($subArray)) {
                 throw new Exception('Pokoušíte se hledat parametry v rámci proměnné, která není pole. '
-                . 'Zadali jste příliš mnoho klíčů pro hledání parametru.');
+                    . 'Zadali jste příliš mnoho klíčů pro hledání parametru.');
             }
 
             return $this->searchForParameter($subArray, $key);
