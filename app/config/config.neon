@@ -4,8 +4,13 @@ parameters:
         metaAuthor: 'Peter Holop'
         metaDesc: 'Webové stránky rodiny Holopových'
         metaKeys: 'manželé, Holopovi, Holop, Holopová'
-        version: '2.0.1'
+        version: '2.1.0'
         loadEvents: 3
+    doctrine:
+        host: 'wm136.wedos.net'
+        user: 'a24810_holop'
+        pass: 'LxBvTHjm'
+        name: 'd24810_holop'
     images:
         timelineFolder: 'images/fotky/'
         timelineThumbsFolder: 'images/thumbs/'
@@ -20,10 +25,36 @@ application:
         errorPresenter: Error
         mapping:
                 *: App\*Module\Presenters\*Presenter
+dbal:
+    connection:
+        host: %doctrine.host%
+        user: %doctrine.user%
+        password: %doctrine.pass%
+        dbname: %doctrine.name%
+
+orm.annotations:
+    paths:
+        - app/Model/Entities
 
 session:
         expiration: 14 days
 
 services:
         appSettings: Model\Service\AppSettings
-        router: App\RouterFactory::createRouter
+
+        # Router
+        - App\RouterFactory
+        router: @App\RouterFactory::createRouter
+
+        EventRepository:
+        		class: App\Model\FrontModule\Repository\EventRepository
+        		tags:
+        			doctrine.repositoryEntity: App\Model\Entities\Event
+        - Doctrine\ORM\Mapping\ClassMetadata(App\Model\Entities\Event)
+
+extensions:
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+    dbal: Nettrine\DBAL\DI\DbalExtension
+    orm: Nettrine\ORM\DI\OrmExtension
+    orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+    orm.console: Nettrine\ORM\DI\OrmConsoleExtension

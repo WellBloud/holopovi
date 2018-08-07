@@ -1,0 +1,33 @@
+{block content}
+    <div class="theme-showcase" role="main">
+        <div class="page-header">
+            <h1><i class="fa fa-calendar-o"></i>{$event->getTitle()}
+                <small>
+                    <time datetime="{$event->getHappenedOn()|date:'Y-m-d'}">{$event->getHappenedOn()|date:'j. n. Y'}
+                        <em>({$event->getFormattedTimeAgo()})</em>
+                    </time>
+                </small>
+            </h1>
+        </div>
+        <section n:if="$event">
+            <div n:if="!empty($event->getDescription())">{$event->getDescription()|noescape}</div>
+            <p n:if="$event->getAlbum()">
+                <a n:foreach="$event->getImages() as $foto" class="minialbum" id="{$event->getAlbum()}"
+                                                            href="{$basePath}/{$timelineFolder}{$event->getAlbum()}/{$foto}">
+                    <img src="{$basePath}/{$timelineThumbsFolder}{$event->getAlbum()}/{$foto}"
+                         alt="{$event->getTitle()}"/>
+                </a>
+            </p>
+        </section>
+        <div class="well">
+            <a n:ifset="$nextEvent" n:href="EventDetail:, $nextEvent->getId()">
+                <i class="fa fa-fw fa-arrow-left"></i>
+                Novější událost
+            </a>
+            <a n:ifset="$previousEvent" n:href="EventDetail:, $previousEvent->getId()" n:class="$nextEvent ? 'pull-right'">
+                Starší událost
+                <i class="fa fa-fw fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+{/block}
