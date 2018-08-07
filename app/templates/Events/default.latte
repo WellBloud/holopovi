@@ -1,55 +1,60 @@
 {block content}
-<div class="theme-showcase" role="main">
-    <div class="page-header">
-        <h1><i class="fa fa-calendar-o"></i>Události <small>aneb společná cesta životem</small></h1>
-    </div>
-    <section id="timeline" class="tl-container" n:if="!empty($events)">
-        <div data-ajax-append n:snippet="eventsSnippet">
-            <section n:foreach="$events as $event" class="timeline-block">
-                <div class="timeline-img {$event['icon']}">
-                    <img src="{$basePath}/images/cd-icon-{$event['icon']}.svg" alt="{$event['icon']}">
-                </div>
-                <div class="timeline-content">
-                    <h2>{$event['title']}</h2>
-                    <div>{$event['desc']|noescape}</div>
-                    <p n:if="$event['album'] !== false">
-                        {foreach $event['images'] as $foto}
-                            <a class="minialbum" id="{$event['album']}" href="{$basePath}/{$timelineFolder}{$event['album']}/{$foto}">
-                                <img src="{$basePath}/{$timelineThumbsFolder}{$event['album']}/{$foto}" alt="{$event['title']}" />
-                            </a>
-                        {/foreach}
-                    </p>
-                    <div class="time">
-                        <time datetime="{$event['date']}">{$event['date']|date:'j. n. Y'}<br />
-                            <small>{$event['jetomu']}</small>
-                        </time>
-                    </div>
-                </div>
-            </section>
+    <div class="theme-showcase" role="main">
+        <div class="page-header">
+            <h1><i class="fa fa-calendar-o"></i>Události
+                <small>aneb společná cesta životem</small>
+            </h1>
         </div>
-    </section>
-</div>
+        <section id="timeline" class="tl-container" n:if="!empty($events)">
+            <div data-ajax-append n:snippet="eventsSnippet">
+                <section n:foreach="$events as $event" class="timeline-block">
+                    <div class="timeline-img {$event->getIcon()->getName()}">
+                        <img src="{$basePath}/images/cd-icon-{$event->getIcon()->getName()}.svg"
+                             alt="{$event->getIcon()->getName()}">
+                    </div>
+                    <div class="timeline-content">
+                        <h2><a n:href="EventDetail:, $event->getId()">{$event->getTitle()}</a></h2>
+                        <div>{$event->getDescription()|noescape}</div>
+                        <p n:if="$event->getAlbum()">
+                            <a n:foreach="$event->getImages() as $foto" class="minialbum" id="{$event->getAlbum()}"
+                                                                        href="{$basePath}/{$timelineFolder}{$event->getAlbum()}/{$foto}">
+                                <img src="{$basePath}/{$timelineThumbsFolder}{$event->getAlbum()}/{$foto}"
+                                     alt="{$event->getTitle()}"/>
+                            </a>
+                        </p>
+                        <div class="time">
+                            <time datetime="{$event->getHappenedOn()|date:'Y-m-d'}">{$event->getHappenedOn()|date:'j. n. Y'}
+                                <br/>
+                                <small>{$event->getFormattedTimeAgo()}</small>
+                            </time>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
 {/block}
 {block scripts}
-<script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
-<script>
-    /**
-     * Load more orders when window scroll reaches bottom of the page
-     */
-    $(window).scroll(function () { //detect page scroll
-        //if user scrolled to bottom of the page
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            var count = $('.timeline-block').length;
-            $.nette.ajax({
-                type: 'POST',
-                url: {link loadMoreEvents!},
-                data: {
-                    offset: count
-                }
-            }).done(function () {
-                hideTimelineBlocks();
-            });
-        }
-    });
-</script>
+    <script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
+    <script>
+        /**
+         * Load more orders when window scroll reaches bottom of the page
+         */
+        $(window).scroll(function () { //detect page scroll
+            //if user scrolled to bottom of the page
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                var count = $('.timeline-block').length;
+                $.nette.ajax({
+                    type: 'POST',
+                    url: {link loadMoreEvents!},
+                    data: {
+                        offset: count
+                    }
+                }).done(function () {
+                    hideTimelineBlocks();
+                    resetLigthbox();
+                });
+            }
+        });
+    </script>
 {/block}

@@ -55,17 +55,7 @@ $(document).ready(function () {
 
     // timeline udalosti
     hideTimelineBlocks();
-
-    $('.minialbum').each(function () {
-        var id = $(this).attr('id');
-        $(this).colorbox({
-            rel: id,
-            maxWidth: '98%',
-            maxHeight: '98%',
-            slideshow: false,
-            slideshowAuto: false
-        });
-    });
+    resetLigthbox();
 });
 
 //on scolling, show/animate timeline blocks when enter the viewport
@@ -85,5 +75,18 @@ function hideTimelineBlocks() {
         if ($(this).offset().top > $(window).scrollTop() + $(window).height() * 0.75) {
             $(this).find('.timeline-img, .timeline-content, .time').addClass('is-hidden');
         }
+    });
+}
+
+function resetLigthbox() {
+    $('.minialbum').each(function () {
+        var id = $(this).attr('id');
+        $(this).colorbox({
+            rel: id,
+            maxWidth: '98%',
+            maxHeight: '98%',
+            slideshow: false,
+            slideshowAuto: false
+        });
     });
 }
