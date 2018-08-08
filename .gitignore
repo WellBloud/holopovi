@@ -6,3 +6,5 @@ www/images/thumbs/*
 www/images/fotky/*
 www/soubory/*
 .idea/
+.deployment
+deployment.*

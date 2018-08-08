@@ -7,8 +7,9 @@
 
 namespace App\Presenters;
 
-use Model\Service\AppSettings,
-    Nette\Utils\Strings;
+use App\Model\Helpers\FileSystemHelper;
+use Model\Service\AppSettings;
+use Nette\Utils\Strings;
 
 class GalleryPresenter extends BasePresenter
 {
@@ -29,7 +30,6 @@ class GalleryPresenter extends BasePresenter
 
     public function actionDefault()
     {
-
     }
 
     public function actionDetail($id)
@@ -40,11 +40,11 @@ class GalleryPresenter extends BasePresenter
                 break;
             }
         }
-        if ($this->album === NULL) {
+        if ($this->album === null) {
             $this->flashMessage('Album nenalezeno', 'warning');
             $this->redirect('Gallery:');
         }
-        $photos = $this->getFiles($this->albumsFolder . $this->album['title']);
+        $photos = FileSystemHelper::getFiles($this->albumsFolder . $this->album['title']);
         $this->photos = array_diff($photos, [$this->albumsThumbsFolder]);
     }
 
@@ -64,17 +64,17 @@ class GalleryPresenter extends BasePresenter
 
     private function getAlbums()
     {
-        $albums = $this->getFiles($this->albumsFolder);
+        $albums = FileSystemHelper::getFiles($this->albumsFolder);
         if (empty($albums)) {
             return [];
         }
         $final = [];
         foreach ($albums as $album) {
-            $photos = $this->getFiles($this->albumsFolder . $album . '/' . $this->albumsThumbsFolder);
+            $photos = FileSystemHelper::getFiles($this->albumsFolder . $album . '/' . $this->albumsThumbsFolder);
             $final[] = [
                 'title' => $album,
                 'webalized' => Strings::webalize($album),
-                'photo' => $this->albumsFolder . $album . '/' . $this->albumsThumbsFolder . '/' . $photos[array_rand($photos)]
+                'photo' => $this->albumsFolder . $album . '/' . $this->albumsThumbsFolder . '/' . $photos[array_rand($photos)],
             ];
         }
         return $final;

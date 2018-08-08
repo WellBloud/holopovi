@@ -26,7 +26,8 @@
     "tracy/tracy": "^2.4",
     "nettrine/orm": "^0.2.1",
     "nettrine/dbal": "^0.2.6",
-    "contributte/console": "^0.5.0"
+    "contributte/console": "^0.5.0",
+    "dg/ftp-deployment": "^3.0"
   },
   "require-dev": {
     "nette/tester": "^1.6"
