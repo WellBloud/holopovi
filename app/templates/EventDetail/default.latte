@@ -31,3 +31,15 @@
         </div>
     </div>
 {/block}
+
+{block og}
+    <meta property="og:url" content="{$baseUrl}{plink this}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{$event->getTitle()}"/>
+    <meta n:if="!empty($event->getDescription())" property="og:description"
+                                                  content="{$event->getDescription()|noescape}"/>
+
+    <meta property="og:image" n:if="$event->getAlbum()"
+            n:foreach="$event->getImages() as $foto"
+          content="{$baseUrl}/{$timelineFolder}{$event->getAlbum()}/{$foto}"/>
+{/block}

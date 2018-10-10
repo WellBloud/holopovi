@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width">
-        <meta name='description' content='{$metaDesc}'>
-        <meta name='keywords' content='{$metaKeys}'>
-        <meta name='author' content='{$metaAuthor}'>
-        <meta name='robots' content='all'>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name='description' content='{$metaDesc}'>
+    <meta name='keywords' content='{$metaKeys}'>
+    <meta name='author' content='{$metaAuthor}'>
+    <meta name='robots' content='all'>
 
-        <link rel="stylesheet" href="{$basePath}/css/bootstrap.css?v={$version}">
-        <link rel="stylesheet" href="{$basePath}/css/style.css?v={$version}">
-        <link rel="stylesheet" href="{$basePath}/colorbox/colorbox.css?v={$version}" />
-        <link rel="stylesheet" href="{$basePath}/css/TimeCircles.css?v={$version}">
-        <link rel="stylesheet" href="{$basePath}/css/timeline.css?v={$version}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{$basePath}/css/bootstrap.css?v={$version}">
+    <link rel="stylesheet" href="{$basePath}/css/style.css?v={$version}">
+    <link rel="stylesheet" href="{$basePath}/colorbox/colorbox.css?v={$version}"/>
+    <link rel="stylesheet" href="{$basePath}/css/TimeCircles.css?v={$version}">
+    <link rel="stylesheet" href="{$basePath}/css/timeline.css?v={$version}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet'
+          type='text/css'>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" href="{$basePath}/favicons/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="{$basePath}/favicons/favicon-16x16.png" sizes="16x16">
-        <link rel="manifest" href="{$basePath}/favicons/manifest.json">
-        <link rel="mask-icon" href="{$basePath}/favicons/safari-pinned-tab.svg" color="#2c3e50">
-        <link rel="shortcut icon" href="{$basePath}/favicons/favicon.ico">
-        <meta name="msapplication-config" content="{$basePath}/favicons/browserconfig.xml">
-        <meta name="theme-color" content="#2c3e50">
+    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="{$basePath}/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{$basePath}/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="{$basePath}/favicons/manifest.json">
+    <link rel="mask-icon" href="{$basePath}/favicons/safari-pinned-tab.svg" color="#2c3e50">
+    <link rel="shortcut icon" href="{$basePath}/favicons/favicon.ico">
+    <meta name="msapplication-config" content="{$basePath}/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#2c3e50">
 
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="{$basePath}/colorbox/jquery.colorbox-min.js?v={$version}"></script>
-        <script src="{$basePath}/js/TimeCircles.js?v={$version}"></script>
-        <script src="{$basePath}/js/modernizr.js?v={$version}"></script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{$basePath}/colorbox/jquery.colorbox-min.js?v={$version}"></script>
+    <script src="{$basePath}/js/TimeCircles.js?v={$version}"></script>
+    <script src="{$basePath}/js/modernizr.js?v={$version}"></script>
 
-        <title>{ifset title}{include title|stripHtml} | {/ifset}{$sitename}</title>
-    </head>
+    <title>{ifset title}{include title|stripHtml} | {/ifset}{$sitename}</title>
+    {block og}
+    {/block}
+</head>
 
-    <body>
-        {include '@header.latte'}
-        <div class="container theme-showcase" role="main">
-            <article>
-                {include '@alert.latte', $flashes}
-                {include content}
-            </article>
-        </div>
-        <footer class="footer">
-            <div class="container">
-                <a nohref class="back-to-top"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
-                <p class="text-center">
-                    {$sitename} &copy; 2014 - {date("Y")}<br />
-                </p>
-            </div>
-        </footer>
-        <script src="{$basePath}/js/general.js?v={$version}"></script>
-        <script src="{$basePath}/js/bootstrap.min.js?v={$version}"></script>
-        {block scripts}
-        {/block}
-    </body>
+<body>
+{include '@header.latte'}
+<div class="container theme-showcase" role="main">
+    <article>
+        {include '@alert.latte', $flashes}
+        {include content}
+    </article>
+</div>
+<footer class="footer">
+    <div class="container">
+        <a nohref class="back-to-top"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+        <p class="text-center">
+            {$sitename} &copy; 2014 - {date("Y")}<br/>
+        </p>
+    </div>
+</footer>
+<script src="{$basePath}/js/general.js?v={$version}"></script>
+<script src="{$basePath}/js/bootstrap.min.js?v={$version}"></script>
+{block scripts}
+{/block}
+</body>
 </html>

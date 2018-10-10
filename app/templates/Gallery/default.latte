@@ -1,12 +1,12 @@
 {block content}
-<div class="theme-showcase" role="main">
-    <div class="page-header">
-        <h1><i class="fa fa-picture-o"></i>Galerie</h1>
-    </div>
-    {if !empty($albums)}
-        <div class="gallery">
-            <div class="row">
-                {foreach $albums as $album}
+    <div class="theme-showcase" role="main">
+        <div class="page-header">
+            <h1><i class="fa fa-picture-o"></i>Galerie</h1>
+        </div>
+        {if !empty($albums)}
+            <div class="gallery">
+                <div class="row">
+                    {foreach $albums as $album}
                     <div class="album col-md-2 col-xs-6">
                         <a n:href="Gallery:detail, $album['webalized']">
                             <h2>{$album['title']}</h2>
@@ -14,12 +14,18 @@
                         </a>
                     </div>
                     {if $iterator->counter == 6}
-                    </div>
-                    <div class="row">
+                </div>
+                <div class="row">
                     {/if}
-                {/foreach}
+                    {/foreach}
+                </div>
             </div>
-        </div>
-    {/if}
-</div>
+        {/if}
+    </div>
+{/block}
+{block og}
+    <meta property="og:url" content="{$baseUrl}{plink this}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Galerie"/>
+    <meta property="og:description" content="fotky ze svatby"/>
 {/block}

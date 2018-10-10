@@ -1,24 +1,35 @@
 {block content}
-<div class="theme-showcase" role="main">
-    <div class="page-header">
-        <h1><i class="fa fa-picture-o"></i><a n:href="Gallery:">Galerie</a> <small>{$album['title']}</small></h1>
-    </div>
-    {if !empty($photos)}
-        <div class="gallery">
-            <div class="row">
-                {foreach $photos as $photo}
+    <div class="theme-showcase" role="main">
+        <div class="page-header">
+            <h1><i class="fa fa-picture-o"></i><a n:href="Gallery:">Galerie</a>
+                <small>{$album['title']}</small>
+            </h1>
+        </div>
+        {if !empty($photos)}
+            <div class="gallery">
+                <div class="row">
+                    {foreach $photos as $photo}
                     <div class="photo col-md-2 col-xs-6">
-                        <a class="minialbum" id="{$album['title']}" href="{$basePath}/{$albumsFolder}{$album['title']}/{$photo}">
-                            <img src="{$basePath}/{$albumsFolder}{$album['title']}/{$albumsThumbsFolder}/{$photo}" alt="{$album['title']}"/>
+                        <a class="minialbum" id="{$album['title']}"
+                           href="{$basePath}/{$albumsFolder}{$album['title']}/{$photo}">
+                            <img src="{$basePath}/{$albumsFolder}{$album['title']}/{$albumsThumbsFolder}/{$photo}"
+                                 alt="{$album['title']}"/>
                         </a>
                     </div>
                     {if $iterator->counter %6 === 0}
-                    </div>
-                    <div class="row">
+                </div>
+                <div class="row">
                     {/if}
-                {/foreach}
+                    {/foreach}
+                </div>
             </div>
-        </div>
-    {/if}
-</div>
+        {/if}
+    </div>
+{/block}
+{block og}
+    <meta property="og:url" content="{$baseUrl}{plink this}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Galerie"/>
+    <meta property="og:description" content="{$album['title']}"/>
+    <meta property="og:image" n:if="!empty($photos)" n:foreach="$photos as $photo" content="{$baseUrl}/{$photo}"/>
 {/block}
