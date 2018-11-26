@@ -49,7 +49,7 @@ class RouterFactory
                 Route::FILTER_OUT => function ($id) {
                     $entity = $this->eventRepository->find($id);
                     return $entity->getAlias();
-                }
+                },
             ],
         ]);
 
@@ -61,6 +61,7 @@ class RouterFactory
                     'oznameni' => 'Invitation',
                     'galerie' => 'Gallery',
                     'udalosti' => 'Events',
+                    'tricitka' => 'Thirty',
                 ],
             ],
             'action' => 'default',
