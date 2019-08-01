@@ -6,11 +6,6 @@ parameters:
         metaKeys: 'manželé, Holopovi, Holop, Holopová'
         version: '2.1.0'
         loadEvents: 3
-    doctrine:
-        host: 'wm136.wedos.net'
-        user: 'a24810_holop'
-        pass: 'LxBvTHjm'
-        name: 'd24810_holop'
     images:
         timelineFolder: 'images/fotky/'
         timelineThumbsFolder: 'images/thumbs/'
